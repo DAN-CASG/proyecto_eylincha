@@ -1,0 +1,371 @@
+@import url('https://fonts.googleapis.com/css2?family=Krona+One&family=Montserrat:wght@400;600;700;800;900&display=swap');
+
+:root {
+    --bg-oscuro: #090314;
+    --neon-rosa: #ff2a85;
+    --neon-violeta: #9d4edd;
+    --neon-dorado: #ffb703;
+    --texto-principal: #ffffff;
+    --texto-secundario: #e2d9f3;
+    
+    --fuente-krona: 'Krona One', sans-serif;
+    --fuente-montserrat: 'Montserrat', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    min-height: 100vh;
+    background-color: var(--bg-oscuro);
+    /* Degradados radiales que simulan luces de discoteca/fiesta */
+    background-image: 
+        radial-gradient(circle at 10% 20%, rgba(255, 42, 133, 0.25) 0%, transparent 40%),
+        radial-gradient(circle at 90% 30%, rgba(157, 78, 221, 0.3) 0%, transparent 45%),
+        radial-gradient(circle at 50% 80%, rgba(255, 183, 3, 0.15) 0%, transparent 50%);
+    color: var(--texto-principal);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: var(--fuente-montserrat);
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
+}
+
+/* --- PARTÍCULAS / DECORACIÓN DE FONDO --- */
+.particula {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    filter: blur(40px);
+    z-index: 0;
+}
+.p1 { width: 300px; height: 300px; background: rgba(255, 42, 133, 0.2); top: 10%; left: 5%; }
+.p2 { width: 250px; height: 250px; background: rgba(157, 78, 221, 0.25); top: 50%; right: 5%; }
+
+/* --- ANIMACIONES --- */
+@keyframes pulsoOnda {
+    0% { box-shadow: 0 0 0 0 rgba(255, 42, 133, 0.6); }
+    70% { box-shadow: 0 0 0 18px rgba(255, 42, 133, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 42, 133, 0); }
+}
+
+@keyframes flotacionSoft {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+}
+
+@keyframes brilloBadge {
+    0%, 100% { border-color: var(--neon-dorado); box-shadow: 0 0 15px rgba(255, 183, 3, 0.4); }
+    50% { border-color: var(--neon-rosa); box-shadow: 0 0 25px rgba(255, 42, 133, 0.7); }
+}
+
+/* --- CABECERA Y NAVEGACIÓN --- */
+.header {
+    padding: 1.5rem 5% 0.8rem 5%;
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    position: relative;
+    z-index: 2;
+    flex-shrink: 0;
+}
+
+.header__menu {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.header__menu__link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--fuente-montserrat);
+    font-size: clamp(0.85rem, 1vw, 1.1rem);
+    font-weight: 800;
+    color: #ffffff;
+    text-decoration: none;
+    letter-spacing: 1px;
+    
+    border: 2.5px solid var(--neon-rosa);
+    border-radius: 50px;
+    padding: 10px 28px;
+    background: rgba(255, 42, 133, 0.15);
+    backdrop-filter: blur(10px);
+    
+    transition: all 0.3s ease;
+}
+
+.header__menu__link:hover,
+.header__menu__link.activo {
+    background: linear-gradient(135deg, var(--neon-rosa), var(--neon-violeta));
+    border-color: #ffffff;
+    box-shadow: 0 0 25px rgba(255, 42, 133, 0.8);
+    transform: translateY(-2px);
+}
+
+.header__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: clamp(0.8rem, 0.9vw, 1rem);
+    font-weight: 800;
+    color: #ffffff;
+    padding: 8px 20px;
+    border-radius: 50px;
+    border: 2px solid var(--neon-dorado);
+    background: rgba(255, 183, 3, 0.12);
+    backdrop-filter: blur(8px);
+    animation: brilloBadge 3s infinite ease-in-out;
+}
+
+/* --- SECCIÓN PRINCIPAL CON CRISTAL / GLASSMORPHISM --- */
+.presentacion {
+    padding: 1rem 5%;
+    display: flex;
+    align-items: center; /* Alineación vertical perfecta al centro */
+    justify-content: center;
+    gap: 35px;
+    flex: 1;
+    max-width: 1350px;
+    margin: 0 auto;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+}
+
+/* Tarjeta elegante tipo carta de cumpleaños */
+.presentacion__contenido {
+    flex: 1 1 55%;
+    max-width: 650px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    padding: 2rem 2.2rem;
+    
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 42, 133, 0.3);
+    border-radius: 24px;
+    backdrop-filter: blur(16px);
+    box-shadow: 
+        0 15px 35px rgba(0, 0, 0, 0.6),
+        inset 0 0 20px rgba(255, 42, 133, 0.1);
+}
+
+.tag-subtitulo {
+    display: inline-block;
+    align-self: flex-start;
+    font-size: clamp(0.75rem, 0.85vw, 0.9rem);
+    font-weight: 800;
+    letter-spacing: 1.2px;
+    color: var(--neon-dorado);
+    text-transform: uppercase;
+    background: rgba(255, 183, 3, 0.15);
+    padding: 5px 14px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 183, 3, 0.3);
+}
+
+.presentacion__contenido__titulo {
+    font-size: clamp(1.6rem, 2.4vw, 2.8rem);
+    font-family: var(--fuente-krona);
+    line-height: 1.2;
+    color: #ffffff;
+}
+
+.nombre-destacado {
+    background: linear-gradient(135deg, var(--neon-rosa), var(--neon-dorado));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 12px rgba(255, 42, 133, 0.6));
+}
+
+.presentacion__contenido__texto {
+    font-size: clamp(0.9rem, 1vw, 1.1rem);
+    font-weight: 500;
+    color: var(--texto-secundario);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Recuadro flotante para resaltar el segundo mensaje */
+.tarjeta-nota {
+    background: linear-gradient(135deg, rgba(157, 78, 221, 0.2), rgba(255, 42, 133, 0.15));
+    border-left: 4px solid var(--neon-rosa);
+    padding: 1rem 1.3rem;
+    border-radius: 12px;
+    font-size: clamp(0.85rem, 0.95vw, 1.05rem);
+    color: #ffffff;
+    line-height: 1.55;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Botón interactivo */
+.btn-sorpresa {
+    align-self: flex-start;
+    margin-top: 0.3rem;
+    font-family: var(--fuente-montserrat);
+    font-size: clamp(0.85rem, 0.95vw, 1rem);
+    font-weight: 800;
+    color: #ffffff;
+    background: linear-gradient(90deg, var(--neon-rosa), var(--neon-violeta));
+    border: none;
+    padding: 10px 24px;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(255, 42, 133, 0.5);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-sorpresa:hover {
+    transform: scale(1.04);
+    box-shadow: 0 0 28px rgba(255, 42, 133, 0.9);
+}
+
+/* --- FOTO POLAROID REINVENTADA --- */
+.presentacion__galeria {
+    flex: 1 1 40%;
+    max-width: 480px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.polaroid-wrapper {
+    position: relative;
+    padding: 12px 12px 18px 12px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.8),
+        0 0 35px rgba(157, 78, 221, 0.4);
+    animation: flotacionSoft 4s ease-in-out infinite;
+    transition: transform 0.3s ease;
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Detalle tipo cinta adhesiva arriba de la foto */
+.cinta-adhesiva {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 22px;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.presentacion__imagen1 {
+    width: 100%;
+    height: 260px; /* Altura controlada para alineación visual simétrica en laptop */
+    object-fit: cover;
+    border-radius: 10px;
+    display: block;
+}
+
+.polaroid-caption {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    font-weight: 800;
+    font-size: clamp(0.8rem, 0.9vw, 0.95rem);
+    color: #1a0826;
+    letter-spacing: 0.5px;
+}
+
+.polaroid-wrapper:hover {
+    transform: scale(1.03);
+    box-shadow: 
+        0 25px 50px rgba(0, 0, 0, 0.9),
+        0 0 45px rgba(255, 42, 133, 0.8);
+}
+
+/* --- FOOTER INFERIOR --- */
+.footer {
+    color: #ffffff;
+    background: linear-gradient(90deg, var(--neon-rosa), var(--neon-violeta), var(--neon-dorado));
+    padding: 10px 20px;
+    text-align: center;
+    font-size: clamp(0.75rem, 0.85vw, 0.95rem);
+    font-weight: 800;
+    letter-spacing: 1.2px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 -5px 20px rgba(255, 42, 133, 0.3);
+    position: relative;
+    z-index: 2;
+    flex-shrink: 0;
+}
+
+/* ========================================================= */
+/* --- REGLAS RESPONSIVAS PARA DISPOSITIVOS MÓVILES (< 768px) --- */
+/* ========================================================= */
+@media (max-width: 768px) {
+    .p1, .p2 {
+        display: none;
+    }
+
+    .header {
+        flex-direction: column;
+        padding: 1rem 15px 0.5rem 15px;
+        gap: 12px;
+    }
+
+    .header__menu {
+        width: 100%;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .header__menu__link {
+        padding: 8px 18px;
+        font-size: 0.85rem;
+    }
+
+    .header__badge {
+        font-size: 0.8rem;
+        padding: 6px 16px;
+    }
+
+    .presentacion {
+        flex-direction: column; /* Cambia a 1 sola columna vertical */
+        padding: 1rem 15px 1.5rem 15px;
+        gap: 25px;
+    }
+
+    .presentacion__contenido {
+        width: 100%;
+        max-width: 100%;
+        padding: 1.4rem 1.2rem;
+    }
+
+    .presentacion__galeria {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .polaroid-wrapper {
+        max-width: 320px;
+    }
+
+    .presentacion__imagen1 {
+        height: 220px;
+    }
+
+    .footer {
+        padding: 10px 12px;
+        font-size: 0.75rem;
+    }
+}
